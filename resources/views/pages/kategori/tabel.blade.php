@@ -1,6 +1,6 @@
  @extends('layouts.app')
- @section('title', 'Tabel Buku')
- @section('Tabel Buku', 'bg-gray-300 dark:bg-gray-700')
+ @section('title', 'Tabel Kategori')
+ @section('Tabel Kategori', 'bg-gray-300 dark:bg-gray-700')
 
  @section('content')
      @if (session()->has('success'))
@@ -59,7 +59,7 @@
          class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
          <div class="w-full mb-1">
              <div class="mb-4">
-                 <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Tabel Buku</h1>
+                 <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Tabel Kategori</h1>
              </div>
              <div class="sm:flex space-between">
                  <div class="items-center mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
@@ -68,7 +68,7 @@
                          <div class="flex items-center">
                              <input type="text" name="search"
                                  class="flex-1 bg-gray-50 w-[20rem] border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                 placeholder="Cari Buku">
+                                 placeholder="Cari Kategori">
                              <button type="submit"
                                  class="ml-2 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800">
                                  Cari
@@ -89,19 +89,6 @@
                              </svg>
                              Tambah
                          </button>
-                         {{-- <div id="dropdownMenu"
-                             class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-50"
-                             role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
-                             <div class="py-1" role="none">
-                                 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                                     class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
-                                     role="menuitem">Tambah
-                                     Buku</button>
-                                 <button data-modal-target="crud-kategori-modal" data-modal-toggle="crud-kategori-modal"
-                                     class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
-                                     role="menuitem">Tambah Kategori</button>
-                             </div>
-                         </div> --}}
                      </div>
                  </div>
 
@@ -120,24 +107,8 @@
                                      #
                                  </th>
                                  <th scope="col"
-                                     class="p-4 text-m font-medium text-left text-gray-500 dark:text-gray-400">
-                                     Sampul Buku
-                                 </th>
-                                 <th scope="col"
-                                     class="p-4 text-m font-medium text-left text-gray-500 dark:text-gray-400">
-                                     Judul Buku
-                                 </th>
-                                 <th scope="col"
-                                     class="p-4 text-m font-medium text-gray-500 dark:text-gray-400 text-left">
-                                     Kategori Buku
-                                 </th>
-                                 <th scope="col"
-                                     class="p-4 text-m font-medium text-gray-500 dark:text-gray-400 text-left">
-                                     Jumlah Buku
-                                 </th>
-                                 <th scope="col"
-                                     class="p-4 text-m font-medium text-gray-500 dark:text-gray-400 text-left">
-                                     Deskripsi
+                                     class="p-4 text-m font-medium text-center text-gray-500 dark:text-gray-400">
+                                     Nama Kategori
                                  </th>
                                  <th scope="col"
                                      class="p-4 text-m font-medium text-gray-500 dark:text-gray-400 text-center">
@@ -146,7 +117,7 @@
                              </tr>
                          </thead>
                          <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                             @foreach ($buku as $b)
+                             @foreach ($kategori as $k)
                                  <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
 
                                      <td class="w-4 p-4">
@@ -155,70 +126,30 @@
                                              {{ $loop->iteration }}
                                          </div>
                                      </td>
-                                     <td class="w-4 p-4">
-                                         <div
-                                             class="max-w-sm p-4 overflow-hidden text-base font-medium text-gray-900 truncate xl:max-w-xs dark:text-white">
-                                             <img src="{{ $b->cover_buku ? asset('storage/' . $b->cover_buku) : asset('/img/default-profile.png') }}"
-                                                 class="img-fluid" style="max-width: 50px; cursor: pointer">
-                                         </div>
-                                     </td>
 
-                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         {{ $b->judul_buku }}
-                                     </td>
-                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         {{ $b->kategori->kategori_buku }}
+                                     <td
+                                         class="p-4 text-base text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                         {{ $k->kategori_buku }}
 
-                                     </td>
-                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         {{ $b->jumlah_buku }}
-
-                                     </td>
-                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-normal dark:text-white">
-                                         @php
-                                             $wordLimit = 6;
-                                             $words = explode(' ', $b->deskripsi);
-                                         @endphp
-
-                                         @if (count($words) > $wordLimit)
-                                             <span class="short-description block whitespace-pre-wrap">
-                                                 {{ implode(' ', array_slice($words, 0, $wordLimit)) }}...
-                                             </span>
-                                             <span class="full-description hidden whitespace-pre-wrap">
-                                                 {{ $b->deskripsi }}
-                                             </span>
-                                             <button onclick="toggleDescription(this)"
-                                                 class="text-blue-500 hover:underline mt-2">
-                                                 Lihat lebih lengkap
-                                             </button>
-                                         @else
-                                             <span class="block whitespace-pre-wrap">{{ $b->deskripsi }}</span>
-                                         @endif
                                      </td>
                                      <td class="p-4 space-x-2 whitespace-nowrap text-center">
-                                         <button data-modal-target="edit-modal-{{ $b->id }}"
-                                             data-modal-toggle="edit-modal-{{ $b->id }}" type="button"
+                                         <button data-modal-target="edit-kategori-modal-{{ $k->id }}"
+                                             data-modal-toggle="edit-kategori-modal-{{ $k->id }}" type="button"
                                              data-modal-toggle="delete-user-modal-3"
                                              class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-yellow-500 hover:bg-yellow-700 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-500 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900">
                                              <i class="fa-solid fa-pen"></i>
                                          </button>
-                                         <button data-modal-target="buku-modal-{{ $b->id }}"
-                                             data-modal-toggle="buku-modal-{{ $b->id }}" type="button"
+                                         <button data-modal-target="delete-kategori-modal-{{ $k->id }}"
+                                             data-modal-toggle="delete-kategori-modal-{{ $k->id }}" type="button"
                                              data-modal-toggle="delete-user-modal-3"
-                                             class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
-                                             <i class="fa-solid fa-eye"></i>
-                                         </button>
-                                         <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                             type="button" data-modal-toggle="delete-user-modal-3"
                                              class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900">
 
                                              <i class="fa-solid fa-trash"></i>
                                          </button>
                                      </td>
                                  </tr>
-                                 <x-modal.buku.modalDelete id='{{ $b->id }}' />
-                                 <x-modal.buku.modalEditBuku :kategori='$kategori' :buku='$bukuEdit[$b->id]' />
-                                 <x-modal.buku.modalLihatBuku :buku='$bukuEdit[$b->id]' />
+                                 <x-modal.kategori.modalDeleteKategori id='{{ $k->id }}' />
+                                 <x-modal.kategori.modalEditKategori :kategori='$kategori[$k->id]' />
                              @endforeach
                          </tbody>
                      </table>
@@ -285,9 +216,7 @@
      </div>
      </div>
 
-     <x-modal.buku.modalCreateBuku :kategori='$kategori' />
-
-
+     <x-modal.kategori.modalCreateKategori :kategori='$kategori' />
  @endsection
 
  <script>
