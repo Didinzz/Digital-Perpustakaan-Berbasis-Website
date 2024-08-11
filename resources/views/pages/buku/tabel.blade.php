@@ -77,9 +77,10 @@
                      </form>
                  </div>
                  <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
+                     <!-- Tombol Tambah -->
                      <div class="relative inline-block text-left">
                          <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                             class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800"
+                             class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800"
                              id="dropdownButton" aria-expanded="true" aria-haspopup="true">
                              <svg class="w-5 h-5 mr-2 -ml-1 transition-transform duration-300" id="plusIcon"
                                  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -89,22 +90,22 @@
                              </svg>
                              Tambah
                          </button>
-                         {{-- <div id="dropdownMenu"
-                             class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-50"
-                             role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
-                             <div class="py-1" role="none">
-                                 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                                     class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
-                                     role="menuitem">Tambah
-                                     Buku</button>
-                                 <button data-modal-target="crud-kategori-modal" data-modal-toggle="crud-kategori-modal"
-                                     class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
-                                     role="menuitem">Tambah Kategori</button>
-                             </div>
-                         </div> --}}
                      </div>
-                 </div>
+                     <div class="relative inline-block text-left">
+                         <a href="{{ route('dashboard.export.buku') }}" type="button"
+                             class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 sm:w-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                             id="dropdownButton" aria-expanded="true" aria-haspopup="true">
+                             <svg class="w-5 h-5 mr-2 -ml-1 transition-transform duration-300" id="plusIcon"
+                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd"
+                                     d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                     clip-rule="evenodd"></path>
+                             </svg>
+                             Export Excel
+                         </a>
+                     </div>
 
+                 </div>
              </div>
          </div>
      </div>
@@ -199,13 +200,13 @@
                                          <button data-modal-target="edit-modal-{{ $b->id }}"
                                              data-modal-toggle="edit-modal-{{ $b->id }}" type="button"
                                              data-modal-toggle="delete-user-modal-3"
-                                             class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-yellow-500 hover:bg-yellow-700 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-500 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900">
+                                             class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-yellow-400 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-500 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900">
                                              <i class="fa-solid fa-pen"></i>
                                          </button>
                                          <button data-modal-target="buku-modal-{{ $b->id }}"
                                              data-modal-toggle="buku-modal-{{ $b->id }}" type="button"
                                              data-modal-toggle="delete-user-modal-3"
-                                             class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
+                                             class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
                                              <i class="fa-solid fa-eye"></i>
                                          </button>
                                          <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
@@ -261,7 +262,7 @@
          </div>
          <div class="flex items-center space-x-3">
              <a href=""
-                 class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                 class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                  <svg class="w-5 h-5 mr-1 -ml-1"" fill=" currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd"
@@ -271,7 +272,7 @@
                  Previous
              </a>
              <a href=""
-                 class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                 class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                  Next
                  <svg class="w-5 h-5 ml-1 -mr-1" fill="currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">

@@ -13,27 +13,24 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    {{-- @vite('resources/css/app.css') --}}
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/app.js') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <link rel="stylesheet" href="{{ asset('assets/css/valid.css') }}">
 
 </head>
 
 <body class="bg-white dark:bg-gray-900">
-    {{-- <div modal-backdrop="" class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40"></div> --}}
 
     @include('components.navbar')
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
         @include('components.sidebar')
         <div id="main-content" class="relative w-full h-full overflow-y-auto bg-white lg:ml-64 dark:bg-gray-900">
             <main>
-                <div class="px-4 pt-6">
+                <div class="px-4 pt-6 rounded-md shadow-md">
                     @yield('content')
-                    <div class="flex justify-center ">
+                    <div class="flex justify-center shadow-md rounded-md">
                         @include('components.footer')
                     </div>
                 </div>
@@ -79,14 +76,11 @@
             }
         });
 
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.querySelectorAll('.needs-validation')
 
-            // Loop over them and prevent submission
             Array.prototype.slice.call(forms)
                 .forEach(function(form) {
                     form.addEventListener('submit', function(event) {

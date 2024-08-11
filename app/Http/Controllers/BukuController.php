@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BukuExport;
 use App\Models\Buku;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
+
+    public function exportBuku()
+    {
+        return Excel::download(new BukuExport, 'buku.xlsx');
+        // return (new BukuExport)->download('buku.xlsx');
+    }
     /**
      * Display a listing of the resource.
      */

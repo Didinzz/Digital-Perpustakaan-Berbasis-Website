@@ -1,10 +1,12 @@
 <?php
 
+use App\Exports\BukuExport;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\KategoriController;
 use App\Models\Buku;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +31,6 @@ Route::middleware(['admin'])->group(function () {
         Route::get('', fn() => view('pages.index', ['books' => Buku::all()]))->name('index');
         Route::resource('buku', BukuController::class)->names('buku');
         Route::resource('kategori', KategoriController::class)->names('kategori');
+        Route::get('/export-buku', [BukuController::class, 'exportBuku'])->name('export.buku');
     });
 });

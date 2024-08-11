@@ -12,19 +12,21 @@ class Buku extends Model
     use HasFactory;
 
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function kategori(){
-        return $this->belongsTo(Kategori::class, 'kategori_id');
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
     }
 
     protected $keyType = 'string';
     public $incrementing = false;
 
 
-     protected static function booted()
+    protected static function booted()
     {
         static::creating(function ($model) {
             if (empty($model->id)) {

@@ -16,9 +16,9 @@
                     <li class="relative group">
                         <button id="dropdownSidebarButton"
                             class="flex items-center p-2 {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') ? 'bg-gray-200 dark:bg-gray-700' : '' }} text-base text-gray-900 rounded-lg hover:bg-gray-200 group dark:text-gray-200 dark:hover:bg-gray-700 w-full">
-                            <i class="fa-solid fa-gear transition-transform duration-300" id="girIcon"></i>
+                            <i class="fa-solid fa-gear transition-transform duration-300 " id="girIcon"></i>
                             <span class="ml-3" sidebar-toggle-item>Master Action</span>
-                            <svg class="w-4 h-4 ml-auto -mr-2 transition-transform duration-300"
+                            <svg class="w-4 h-4 ml-auto -mr-2 transition-transform duration-300 {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') ? 'rotate-180' : '' }}"
                                 id="dropdownSidebarIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -26,7 +26,8 @@
                                 </path>
                             </svg>
                         </button>
-                        <ul class=" group-hover:block pl-6 mt-2 space-y-2 hidden " id="dropdownSidebarMenu">
+                        <ul class=" group-hover:block pl-6 mt-2 space-y-2  {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') ? 'block' : 'hidden' }} "
+                            id="dropdownSidebarMenu">
                             <li>
                                 <a href="{{ route('dashboard.buku.index') }}"
                                     class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700 {{ Request::is('dashboard/buku*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
