@@ -15,15 +15,15 @@ class AdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
-    {
-    if (!auth()->user()) {
-      return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
-    }
+    // public function handle(Request $request, Closure $next): Response
+    // {
+    // if (!auth()->user()) {
+    //   return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
+    // }
 
-    if (!in_array(auth()->user()->role, [User::ROLE_ADMIN])) {
-      return redirect()->route('login')->with('error', 'Anda tidak memiliki akses ke halaman tersebut.');
-    }
-        return $next($request);
-    }
+    // if (!in_array(auth()->user()->role, [User::ROLE_ADMIN])) {
+    //   return redirect()->route('login')->with('error', 'Anda tidak memiliki akses ke halaman tersebut.');
+    // }
+    //     return $next($request);
+    // }
 }

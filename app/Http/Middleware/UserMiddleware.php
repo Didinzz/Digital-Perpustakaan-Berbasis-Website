@@ -17,12 +17,12 @@ class UserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!auth()->user()) {
-      return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
-    }
+            return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
+        }
 
-      if (!in_array(auth()->user()->role, [User::ROLE_USER])) {
-      return redirect()->route('tes')->with('error', 'Anda tidak memiliki akses ke halaman tersebut.');
-    }
+        // if (!in_array(auth()->user()->role, [User::ROLE_USER])) {
+        //     return redirect()->route('login')->with('error', 'Anda tidak memiliki akses ke halaman tersebut.');
+        // }
         return $next($request);
     }
 }

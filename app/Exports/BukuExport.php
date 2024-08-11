@@ -83,6 +83,7 @@ class BukuExport implements FromView, WithColumnWidths, WithStyles, WithDrawings
         $sheet->getStyle('A2:F2')->applyFromArray($headerStyleArray);
         $sheet->getRowDimension(2)->setRowHeight(20);
         $sheet->getStyle('F')->getAlignment()->setWrapText(true);
+        $sheet->getStyle('C')->getAlignment()->setWrapText(true);
 
         $rowCount = $sheet->getHighestRow();
         for ($i = 3; $i <= $rowCount; $i++) {

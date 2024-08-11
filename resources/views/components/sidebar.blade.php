@@ -15,10 +15,10 @@
                     </li>
                     <li class="relative group">
                         <button id="dropdownSidebarButton"
-                            class="flex items-center p-2 {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') ? 'bg-gray-200 dark:bg-gray-700' : '' }} text-base text-gray-900 rounded-lg hover:bg-gray-200 group dark:text-gray-200 dark:hover:bg-gray-700 w-full">
+                            class="flex items-center p-2 {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') || Request::is('dashboard/List-Buku-Saya*') ? 'bg-gray-200 dark:bg-gray-700' : '' }} text-base text-gray-900 rounded-lg hover:bg-gray-200 group dark:text-gray-200 dark:hover:bg-gray-700 w-full">
                             <i class="fa-solid fa-gear transition-transform duration-300 " id="girIcon"></i>
                             <span class="ml-3" sidebar-toggle-item>Master Action</span>
-                            <svg class="w-4 h-4 ml-auto -mr-2 transition-transform duration-300 {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') ? 'rotate-180' : '' }}"
+                            <svg class="w-4 h-4 ml-auto -mr-2 transition-transform duration-300 {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') || Request::is('dashboard/List-Buku-Saya*') ? 'rotate-180' : '' }}"
                                 id="dropdownSidebarIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -26,7 +26,7 @@
                                 </path>
                             </svg>
                         </button>
-                        <ul class=" group-hover:block pl-6 mt-2 space-y-2  {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') ? 'block' : 'hidden' }} "
+                        <ul class=" group-hover:block pl-6 mt-2 space-y-2  {{ Request::is('dashboard/buku*') || Request::is('dashboard/kategori*') || Request::is('dashboard/List-Buku-Saya*') ? 'block' : 'hidden' }} "
                             id="dropdownSidebarMenu">
                             <li>
                                 <a href="{{ route('dashboard.buku.index') }}"
@@ -35,13 +35,25 @@
                                     Tabel Buku
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('dashboard.kategori.index') }}"
-                                    class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700 {{ Request::is('dashboard/kategori*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
-                                    <i class="fa-solid fa-tags mr-2"></i>
-                                    Tabel Kategori
-                                </a>
-                            </li>
+                            @if (Auth::user()->role == 'admin')
+                                <li>
+                                    <a href="{{ route('dashboard.kategori.index') }}"
+                                        class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700 {{ Request::is('dashboard/kategori*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+                                        <i class="fa-solid fa-tags mr-2"></i>
+                                        Tabel Kategori
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->role == 'user')
+                                <li>
+                                    <a href="{{ route('dashboard.buku.user') }}"
+                                        class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700 {{ Request::is('dashboard/List-Buku-Saya*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+                                        <i class="fa-solid fa-book-bookmark mr-2"></i>
+                                        Lihat Buku Saya
+                                    </a>
+                                </li>
+                            @endif
+
                         </ul>
                     </li>
                 </ul>

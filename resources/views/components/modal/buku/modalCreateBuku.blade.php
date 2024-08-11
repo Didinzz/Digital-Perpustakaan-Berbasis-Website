@@ -32,7 +32,7 @@
                             Buku</label>
                         <input type="text" name="judul_buku" id="Judul_buku" value="{{ old('judul_buku') }}"
                             class="bg-gray-50 border border-red-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Judul Buku">
+                            placeholder="Judul Buku" required>
                         @error('judul_buku')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -62,8 +62,9 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="cover" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cover
+                        <label for="cover" class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">Cover
                             Buku</label>
+                        <p class=" dark:text-white text-sm mb-1">Ukuran File Maksimal 2 MB dan harus jpg, jpeg, png</p>
                         <input type="file" name="cover" id="cover"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="" required value="{{ old('cover') }}">
@@ -74,6 +75,7 @@
                     <div>
                         <label for="bukuPdf"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">BukuPdf</label>
+                        <p class=" dark:text-white text-sm mb-1">Ukuran File Maksimal 35 MB dan harus pdf</p>
                         <input type="file" name="bukuPdf" id="bukuPdf"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="" required>

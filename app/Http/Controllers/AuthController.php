@@ -35,7 +35,7 @@ class AuthController extends Controller
         ]);
 
         session()->flash('success', 'Registrasi Berhasil');
-        return redirect('/login');
+        return redirect()->route('login');
     }
 
     public function loginProses(Request $request)
@@ -53,7 +53,7 @@ class AuthController extends Controller
                 return redirect('/dashboard');
             } else if ($user->role === User::ROLE_USER) {
                 session()->flash('success', 'Selamat datang ' . $user->name);
-                return redirect('/home');
+                return redirect('/dashboard');
             } else {
                 Auth::logout();
                 return redirect()->back()->with('error', 'Anda tidak memiliki akses admin.');

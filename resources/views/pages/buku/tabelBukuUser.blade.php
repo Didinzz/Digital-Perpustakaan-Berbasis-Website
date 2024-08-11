@@ -1,6 +1,6 @@
  @extends('layouts.app')
- @section('title', 'Tabel Buku')
- @section('Tabel Buku', 'bg-gray-300 dark:bg-gray-700')
+ @section('title', 'Buku saya')
+ @section('Tabel Buku saya', 'bg-gray-300 dark:bg-gray-700')
 
  @section('content')
      @if (session()->has('success'))
@@ -59,11 +59,12 @@
          class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
          <div class="w-full mb-1">
              <div class="mb-4">
-                 <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Tabel Buku</h1>
+                 <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Buku Yang Di Upload
+                 </h1>
              </div>
              <div class="sm:flex space-between">
                  <div class="items-center mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-                     <form class="lg:pr-3" action="{{ route('dashboard.buku.index') }}" method="GET">
+                     <form class="lg:pr-3" action="{{ route('dashboard.buku.user') }}" method="GET">
                          <label for="users-search" class="sr-only">Search</label>
                          <div class="flex items-center">
                              <input type="text" name="judul" value="{{ old('judul') }}"
@@ -99,48 +100,6 @@
                              Tambah
                          </button>
                      </div>
-                     <div class="relative inline-block text-left">
-                         <button id='dropDownExport' type="button"
-                             class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 sm:w-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                             aria-expanded="true" aria-haspopup="true">
-                             <i class="fa-solid fa-download  mr-2 " id="bounceIcon"></i>
-                             Export
-                             <!-- Ikon panah dropdown -->
-                             <svg class="w-4 h-4 ml-2 transform transition-transform duration-300" id="dropdownIcon"
-                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                     d="M19 9l-7 7-7-7">
-                                 </path>
-                             </svg>
-                         </button>
-
-                         <!-- Dropdown menu -->
-                         <div id="dropdownMenu"
-                             class="absolute right-0 z-10 hidden w-full mt-2 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg dark:bg-gray-800 dark:border-gray-700">
-                             <div class="py-1 w-full" role="menu" aria-orientation="vertical"
-                                 aria-labelledby="dropDownExport">
-                                 <!-- Opsi Export Excel dengan ikon -->
-                                 <a href="{{ route('dashboard.export.buku.excel') }}"
-                                     class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600"
-                                     role="menuitem">
-                                     <i class="fa-regular fa-file-lines  mr-2" id="excelIcon"></i>
-                                     <!-- Ikon Excel -->
-
-                                     Excel
-                                 </a>
-                                 <!-- Opsi Export PDF dengan ikon -->
-                                 <a href="{{ route('dashboard.export.buku.pdf') }}"
-                                     class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600"
-                                     role="menuitem">
-                                     <!-- Ikon PDF -->
-                                     <i class="fa-regular fa-file-pdf  mr-2" id="pdfIcon"></i>
-                                     PDF
-                                 </a>
-                             </div>
-                         </div>
-                     </div>
-
                  </div>
              </div>
          </div>

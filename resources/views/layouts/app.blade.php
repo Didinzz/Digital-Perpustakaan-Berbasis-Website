@@ -22,6 +22,8 @@
 </head>
 
 <body class="bg-white dark:bg-gray-900">
+    {{-- <div modal-backdrop="" class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40"></div> --}}
+
 
     @include('components.navbar')
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
@@ -39,30 +41,6 @@
     </div>
     <script src="{{ asset('assets/js/flowbite.min.js') }}"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebarBackdrop = document.getElementById('sidebarBackdrop');
-            const navbarDropdown = document.getElementById('navbar-dropdown');
-            document.getElementById('toggle-nav').addEventListener('click', function() {
-                navbarDropdown.classList.toggle('hidden');
-                sidebarBackdrop.classList.toggle('hidden');
-            });
-            document.getElementById('toggleSidebarMobileSearch').addEventListener('click', function() {
-                navbarDropdown.classList.toggle('hidden');
-                sidebarBackdrop.classList.toggle('hidden');
-            });
-            document.getElementById('sidebarBackdrop').addEventListener('click', function() {
-                navbarDropdown.classList.toggle('hidden');
-                sidebarBackdrop.classList.toggle('hidden');
-            });
-
-            const dropdownButton = document.getElementById('user-menu-button-2');
-            const dropdownMenu = document.getElementById('dropdown-2');
-
-            dropdownButton.addEventListener('click', () => {
-                dropdownMenu.classList.toggle('hidden');
-            });
-        });
-
         document.addEventListener('DOMContentLoaded', function() {
             const close = document.getElementById('close');
             const message = document.getElementById('message');
@@ -94,6 +72,8 @@
                 })
         })()
     </script>
+    <script src="{{ asset('assets/js/exportAnimation.js') }}"></script>
+    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
 
 
 </body>

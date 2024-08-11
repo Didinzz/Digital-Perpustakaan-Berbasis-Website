@@ -4,6 +4,15 @@
 
 <head>
     <style>
+        h2 {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
         body {
             font-family: Arial, sans-serif;
             font-size: 14px;
@@ -26,15 +35,18 @@
         th {
             background-color: #f2f2f2;
         }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 
 <body>
+    <h2>DATA BUKU</h2>
     <table>
         <thead>
-            <tr>
-                <th>DATA BUKU</th>
-            </tr>
             <tr>
                 <th>No</th>
                 <th>Sampul Buku</th>
@@ -48,7 +60,7 @@
             @foreach ($bukus as $buku)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td></td>
+                    <td><img src="{{ public_path('storage/' . $buku->cover_buku) }}" alt=""></td>
                     <td>{{ $buku->judul_buku }}</td>
                     <td>{{ $buku->kategori->kategori_buku }}</td>
                     <td>{{ $buku->jumlah_buku }}</td>

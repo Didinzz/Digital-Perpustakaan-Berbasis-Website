@@ -5,14 +5,42 @@ namespace App\Http\Controllers;
 use App\Exports\BukuExport;
 use App\Models\Buku;
 use App\Models\Kategori;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
 {
+    public function bukuUser(Request $request)
+    {
+        $qeury = Buku::query();
 
-    public function exportBuku()
+        if ($request->filled('judul')) {
+            $qeury->where('judul_buku', 'like', '%' . $request->input('judul') . '%');
+        }
+
+        if ($request->filled('kategori')) {
+            $qeury->where('kategori_id', $request->input('kategori'));
+        }
+
+        $buku = $qeury->with('kategori')->where('user_id', auth()->user()->id)->get();
+
+        $kategori = Kategori::orderBy('updated_at', 'desc')->get();
+        $bukuEdit = Buku::all()->keyBy('id');
+        return view('pages.buku.tabelBukuUser', compact('kategori', 'buku', 'bukuEdit'));
+    }
+
+    public function exportPdf()
+    {
+        $buku = Buku::with('kategori')->get();
+
+
+        $pdf = Pdf::loadView('pages.export.pdf', ['bukus' => $buku]);
+
+        return $pdf->download('buku.pdf');
+    }
+    public function exportExcel()
     {
         return Excel::download(new BukuExport, 'buku.xlsx');
         // return (new BukuExport)->download('buku.xlsx');
@@ -20,10 +48,21 @@ class BukuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $qeury = Buku::query();
+
+        if ($request->filled('judul')) {
+            $qeury->where('judul_buku', 'like', '%' . $request->input('judul') . '%');
+        }
+
+        if ($request->filled('kategori')) {
+            $qeury->where('kategori_id', $request->input('kategori'));
+        }
+
+        $buku = $qeury->with('kategori')->get();
+
         $kategori = Kategori::orderBy('updated_at', 'desc')->get();
-        $buku = Buku::with('kategori')->get();
         $bukuEdit = Buku::all()->keyBy('id');
         return view('pages.buku.tabel', compact('kategori', 'buku', 'bukuEdit'));
     }
@@ -48,14 +87,14 @@ class BukuController extends Controller
                 'jumlahBuku' => 'required',
                 'deskripsi' => 'required',
                 'cover' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Validasi untuk cover buku
-                'bukuPdf' => 'required|mimes:pdf|max:10000', // Validasi untuk PDF buku
+                'bukuPdf' => 'required|mimes:pdf|max:35000', // Validasi untuk PDF buku
             ],
 
             [
                 'cover.mimes' => 'File cover buku harus berupa jpeg, png, jpg',
                 'cover.max' => 'File cover buku tidak boleh lebih dari 2 MB',
                 'bukuPdf.mimes' => 'File buku harus berupa pdf',
-                'bukuPdf.max' => 'File buku tidak boleh lebih dari 10 MB',
+                'bukuPdf.max' => 'File buku tidak boleh lebih dari 35 MB',
             ]
 
         );
