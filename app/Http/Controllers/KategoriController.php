@@ -12,7 +12,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = Kategori::all()->keyBy('id');
+
+        return view('pages.kategori.tabel', compact('kategori'));
     }
 
     /**
@@ -61,7 +63,16 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'kategori' => 'required',
+        ]);
+
+        $kat = Kategori::find($id);
+        $kat->kategori_buku = $request->kategori;
+
+        $kat->save();
+
+        return redirect()->back()->with('success', 'Kategori Berhasil Diubah');
     }
 
     /**

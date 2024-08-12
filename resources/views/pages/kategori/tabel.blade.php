@@ -1,6 +1,6 @@
  @extends('layouts.app')
- @section('title', 'Tabel Buku')
- @section('Tabel Buku', 'bg-gray-300 dark:bg-gray-700')
+ @section('title', 'Tabel Kategori')
+ @section('Tabel Kategori', 'bg-gray-300 dark:bg-gray-700')
 
  @section('content')
      @if (session()->has('success'))
@@ -59,23 +59,16 @@
          class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
          <div class="w-full mb-1">
              <div class="mb-4">
-                 <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Tabel Buku</h1>
+                 <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Tabel Kategori</h1>
              </div>
              <div class="sm:flex space-between">
                  <div class="items-center mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-                     <form class="lg:pr-3" action="{{ route('dashboard.buku.index') }}" method="GET">
+                     <form class="lg:pr-3" action="{{ url('pengajuan') }}" method="GET">
                          <label for="users-search" class="sr-only">Search</label>
                          <div class="flex items-center">
-                             <input type="text" name="judul" value="{{ old('judul') }}"
+                             <input type="text" name="search"
                                  class="flex-1 bg-gray-50 w-[20rem] border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                 placeholder="Cari Judul Buku">
-                             <select name="kategori"
-                                 class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                 <option value="">Pilih Kategori</option>
-                                 @foreach ($kategori as $k)
-                                     <option value="{{ $k->id }}">{{ $k->kategori_buku }}</option>
-                                 @endforeach
-                             </select>
+                                 placeholder="Cari Kategori">
                              <button type="submit"
                                  class="ml-2 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800">
                                  Cari
@@ -83,12 +76,10 @@
                          </div>
                      </form>
                  </div>
-
                  <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
-                     <!-- Tombol Tambah -->
                      <div class="relative inline-block text-left">
                          <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                             class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800"
+                             class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800"
                              id="dropdownButton" aria-expanded="true" aria-haspopup="true">
                              <svg class="w-5 h-5 mr-2 -ml-1 transition-transform duration-300" id="plusIcon"
                                  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -99,49 +90,8 @@
                              Tambah
                          </button>
                      </div>
-                     <div class="relative inline-block text-left">
-                         <button id='dropDownExport' type="button"
-                             class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 sm:w-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                             aria-expanded="true" aria-haspopup="true">
-                             <i class="fa-solid fa-download  mr-2 " id="bounceIcon"></i>
-                             Export
-                             <!-- Ikon panah dropdown -->
-                             <svg class="w-4 h-4 ml-2 transform transition-transform duration-300" id="dropdownIcon"
-                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                     d="M19 9l-7 7-7-7">
-                                 </path>
-                             </svg>
-                         </button>
-
-                         <!-- Dropdown menu -->
-                         <div id="dropdownMenu"
-                             class="absolute right-0 z-10 hidden w-full mt-2 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg dark:bg-gray-800 dark:border-gray-700">
-                             <div class="py-1 w-full" role="menu" aria-orientation="vertical"
-                                 aria-labelledby="dropDownExport">
-                                 <!-- Opsi Export Excel dengan ikon -->
-                                 <a href="{{ route('dashboard.export.buku.excel') }}"
-                                     class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600"
-                                     role="menuitem">
-                                     <i class="fa-regular fa-file-lines  mr-2" id="excelIcon"></i>
-                                     <!-- Ikon Excel -->
-
-                                     Excel
-                                 </a>
-                                 <!-- Opsi Export PDF dengan ikon -->
-                                 <a href="{{ route('dashboard.export.buku.pdf') }}"
-                                     class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600"
-                                     role="menuitem">
-                                     <!-- Ikon PDF -->
-                                     <i class="fa-regular fa-file-pdf  mr-2" id="pdfIcon"></i>
-                                     PDF
-                                 </a>
-                             </div>
-                         </div>
-                     </div>
-
                  </div>
+
              </div>
          </div>
      </div>
@@ -157,24 +107,8 @@
                                      #
                                  </th>
                                  <th scope="col"
-                                     class="p-4 text-m font-medium text-left text-gray-500 dark:text-gray-400">
-                                     Sampul Buku
-                                 </th>
-                                 <th scope="col"
-                                     class="p-4 text-m font-medium text-left text-gray-500 dark:text-gray-400">
-                                     Judul Buku
-                                 </th>
-                                 <th scope="col"
-                                     class="p-4 text-m font-medium text-gray-500 dark:text-gray-400 text-left">
-                                     Kategori Buku
-                                 </th>
-                                 <th scope="col"
-                                     class="p-4 text-m font-medium text-gray-500 dark:text-gray-400 text-left">
-                                     Jumlah Buku
-                                 </th>
-                                 <th scope="col"
-                                     class="p-4 text-m font-medium text-gray-500 dark:text-gray-400 text-left">
-                                     Deskripsi
+                                     class="p-4 text-m font-medium text-center text-gray-500 dark:text-gray-400">
+                                     Nama Kategori
                                  </th>
                                  <th scope="col"
                                      class="p-4 text-m font-medium text-gray-500 dark:text-gray-400 text-center">
@@ -183,7 +117,7 @@
                              </tr>
                          </thead>
                          <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                             @forelse($buku as $b)
+                             @foreach ($kategori as $k)
                                  <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
 
                                      <td class="w-4 p-4">
@@ -192,80 +126,31 @@
                                              {{ $loop->iteration }}
                                          </div>
                                      </td>
-                                     <td class="w-4 p-4">
-                                         <div
-                                             class="max-w-sm p-4 overflow-hidden text-base font-medium text-gray-900 truncate xl:max-w-xs dark:text-white">
-                                             <img src="{{ $b->cover_buku ? asset('storage/' . $b->cover_buku) : asset('/img/default-profile.png') }}"
-                                                 class="img-fluid" style="max-width: 50px; cursor: pointer">
-                                         </div>
-                                     </td>
 
-                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         {{ $b->judul_buku }}
-                                     </td>
-                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         {{ $b->kategori->kategori_buku }}
+                                     <td
+                                         class="p-4 text-base text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                         {{ $k->kategori_buku }}
 
-                                     </td>
-                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         {{ $b->jumlah_buku }}
-
-                                     </td>
-                                     <td class="p-4 text-base font-medium text-gray-900 whitespace-normal dark:text-white">
-                                         @php
-                                             $wordLimit = 6;
-                                             $words = explode(' ', $b->deskripsi);
-                                         @endphp
-
-                                         @if (count($words) > $wordLimit)
-                                             <span class="short-description block whitespace-pre-wrap">
-                                                 {{ implode(' ', array_slice($words, 0, $wordLimit)) }}...
-                                             </span>
-                                             <span class="full-description hidden whitespace-pre-wrap">
-                                                 {{ $b->deskripsi }}
-                                             </span>
-                                             <button onclick="toggleDescription(this)"
-                                                 class="text-blue-500 hover:underline mt-2">
-                                                 Lihat lebih lengkap
-                                             </button>
-                                         @else
-                                             <span class="block whitespace-pre-wrap">{{ $b->deskripsi }}</span>
-                                         @endif
                                      </td>
                                      <td class="p-4 space-x-2 whitespace-nowrap text-center">
-                                         <button data-modal-target="buku-modal-{{ $b->id }}"
-                                             data-modal-toggle="buku-modal-{{ $b->id }}" type="button"
+                                         <button data-modal-target="edit-kategori-modal-{{ $k->id }}"
+                                             data-modal-toggle="edit-kategori-modal-{{ $k->id }}" type="button"
                                              data-modal-toggle="delete-user-modal-3"
-                                             class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
-                                             <i class="fa-solid fa-eye"></i>
+                                             class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-yellow-400 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-500 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900">
+                                             <i class="fa-solid fa-pen"></i>
                                          </button>
-                                         @if ((Auth::check() && Auth::user()->id == $b->user_id) || Auth::user()->role == 'admin')
-                                             <button data-modal-target="edit-modal-{{ $b->id }}"
-                                                 data-modal-toggle="edit-modal-{{ $b->id }}" type="button"
-                                                 data-modal-toggle="delete-user-modal-3"
-                                                 class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-yellow-400 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-500 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900">
-                                                 <i class="fa-solid fa-pen"></i>
-                                             </button>
+                                         <button data-modal-target="delete-kategori-modal-{{ $k->id }}"
+                                             data-modal-toggle="delete-kategori-modal-{{ $k->id }}" type="button"
+                                             data-modal-toggle="delete-user-modal-3"
+                                             class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900">
 
-                                             <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                 type="button" data-modal-toggle="delete-user-modal-3"
-                                                 class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900">
-
-                                                 <i class="fa-solid fa-trash"></i>
-                                             </button>
-                                         @endif
+                                             <i class="fa-solid fa-trash"></i>
+                                         </button>
                                      </td>
                                  </tr>
-                                 <x-modal.buku.modalDelete id='{{ $b->id }}' />
-                                 <x-modal.buku.modalEditBuku :kategori='$kategori' :buku='$bukuEdit[$b->id]' />
-                                 <x-modal.buku.modalLihatBuku :buku='$bukuEdit[$b->id]' />
-                             @empty
-                                 <tr>
-                                     <td colspan="7" class="p-4 text-center text-gray-500 dark:text-gray-400">
-                                         Tidak ada data ditemukan
-                                     </td>
-                                 </tr>
-                             @endforelse
+                                 <x-modal.kategori.modalDeleteKategori id='{{ $k->id }}' />
+                                 <x-modal.kategori.modalEditKategori :kategori='$kategori[$k->id]' />
+                             @endforeach
                          </tbody>
                      </table>
                  </div>
@@ -278,7 +163,7 @@
      </div>
 
      <div
-         class=" my-4 sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+         class=" my-4 sticky bottom-0 right-0 items-center shadow-lg border w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
          <div class="flex items-center mb-4 sm:mb-0">
              <a href=""
                  class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -305,9 +190,9 @@
              </span>
 
          </div>
-         <div class="flex items-center space-x-3">
+         <div class="flex items-center space-x-3 shadow-lg">
              <a href=""
-                 class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                 class=" inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
                  <svg class="w-5 h-5 mr-1 -ml-1"" fill=" currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd"
@@ -331,9 +216,7 @@
      </div>
      </div>
 
-     <x-modal.buku.modalCreateBuku :kategori='$kategori' />
-
-
+     <x-modal.kategori.modalCreateKategori :kategori='$kategori' />
  @endsection
 
  <script>

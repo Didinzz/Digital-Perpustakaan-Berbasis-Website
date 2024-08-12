@@ -5,7 +5,7 @@
 @section('content')
     <div class="text-white">
         <div class="box-border w-full p-4">
-            <h1 class="font-bold text-2xl text-black dark:text-white">Selamat datang didin</h1>
+            <h1 class="font-bold text-2xl text-black dark:text-white">Selamat Datang Di Perpustakaan Digital</h1>
         </div>
     </div>
     @if (session()->has('success'))
@@ -26,9 +26,8 @@
         </div>
     @endif
 
-    {{-- @if ($user->role == 1) --}}
     <div
-        class="block p-4 bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-700  mx-auto">
+        class="block p-4 bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-700 mx-auto">
         <div class="flex flex-wrap -mx-3">
             <div class="w-full md:w-1/2 xl:w-1/3 px-3 mb-4 mx-auto my-2">
                 <!-- Metric Card 1 -->
@@ -36,76 +35,83 @@
                     class="bg-white border border-gray-400 rounded shadow p-4 dark:bg-gray-800 dark:border-gray-700 mx-auto my-4">
                     <div class="flex items-center">
                         <div class="flex-shrink pr-4">
-                            <div class="rounded p-3 bg-green-600"><i class="far fa-envelope fa-2x fa-fw fa-inverse"></i>
+                            <div class="rounded p-3 bg-green-600">
+                                <i class="fas fa-book fa-2x fa-fw fa-inverse"></i>
                             </div>
                         </div>
                         <div class="flex-1 text-right md:text-center">
-                            <h5 class="font-bold uppercase text-gray-700 dark:text-gray-300">Total Surat Masuk</h5>
-                            <h3 class="font-bold text-3xl text-gray-800 dark:text-white">1 <span class="text-green-500"><i
-                                        class="fas fa-caret-up"></i></span></h3>
+                            <h5 class="font-bold uppercase text-gray-700 dark:text-gray-300">Total Buku Tersedia</h5>
+                            <h3 class="font-bold text-3xl text-gray-800 dark:text-white">{{ $totalBuku }} <span
+                                    class="text-green-500"><i class="fas fa-caret-up"></i></span></h3>
                         </div>
                     </div>
                 </div>
                 <!--/Metric Card-->
             </div>
-            <div class="w-full md:w-1/2 xl:w-1/3 px-3 mb-4 mx-auto my-2">
-                <!-- Metric Card 2 -->
-                <div
-                    class="bg-white border border-gray-400 rounded shadow p-4 dark:bg-gray-800 dark:border-gray-700 mx-auto my-4">
-                    <div class="flex items-center">
-                        <div class="flex-shrink pr-4">
-                            <div class="rounded p-3 bg-pink-600"><i
-                                    class="fas fa-envelope-open-text fa-2x fa-fw fa-inverse"></i></div>
-                        </div>
-                        <div class="flex-1 text-right md:text-center">
-                            <h5 class="font-bold uppercase text-gray-700 dark:text-gray-300">Total Surat Keluar</h5>
-                            <h3 class="font-bold text-3xl text-gray-800 dark:text-white">1<span class="text-pink-500"><i
-                                        class="fas fa-caret-down"></i></span></h3>
-                        </div>
-                    </div>
-                </div>
-                <!--/Metric Card-->
-            </div>
-            <div class="w-full md:w-1/2 xl:w-1/3 px-3 mb-4 mx-auto my-2">
-                <!-- Metric Card 3 -->
-                <div
-                    class="bg-white border border-gray-400 rounded shadow p-4 dark:bg-gray-800 dark:border-gray-700 mx-auto my-4">
-                    <div class="flex items-center">
-                        <div class="flex-shrink pr-4">
-                            <div class="rounded p-3 bg-yellow-600"><i class="fas fa-signature fa-2x fa-fw fa-inverse"></i>
+            @if (Auth::user()->role == 'user')
+                <div class="w-full md:w-1/2 xl:w-1/3 px-3 mb-4 mx-auto my-2">
+                    <!-- Metric Card 2 -->
+                    <div
+                        class="bg-white border border-gray-400 rounded shadow p-4 dark:bg-gray-800 dark:border-gray-700 mx-auto my-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink pr-4">
+                                <div class="rounded p-3 bg-pink-600">
+                                    <i class="fas fa-upload fa-2x fa-fw fa-inverse"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right md:text-center">
+                                <h5 class="font-bold uppercase text-gray-700 dark:text-gray-300">Total Buku Yang Diupload
+                                </h5>
+                                <h3 class="font-bold text-3xl text-gray-800 dark:text-white">{{ $totalBukuUploads }}<span
+                                        class="text-pink-500"><i class="fas fa-caret-down ml-2"></i></span></h3>
                             </div>
                         </div>
-                        <div class="flex-1 text-right md:text-center">
-                            <h5 class="font-bold uppercase text-gray-700 dark:text-gray-300">Total Yang Diajukan</h5>
-                            <h3 class="font-bold text-3xl text-gray-800 dark:text-white">1<span
-                                    class="text-yellow-600 ml-2"><i class="fas fa-clock fa-xs"></i></span></h3>
-                        </div>
                     </div>
+                    <!--/Metric Card-->
                 </div>
-            </div>
-            <div class="w-full md:w-1/2 xl:w-1/3 px-3 mb-4 my-1">
-                <!-- Metric Card 3 -->
-                <div
-                    class="bg-white border border-gray-400 rounded shadow p-4 dark:bg-gray-800 dark:border-gray-700 mx-auto my-4">
-                    <div class="flex items-center">
-                        <div class="flex-shrink pr-4">
-                            <div class="rounded p-3 bg-blue-500 text-white">
-                                <i class="fas fa-file-alt fa-2x fa-fw"></i>
+            @endif
+            @if (Auth::user()->role == 'admin')
+                <div class="w-full md:w-1/2 xl:w-1/3 px-3 mb-4 mx-auto my-2">
+                    <!-- Metric Card 3 -->
+                    <div
+                        class="bg-white border border-gray-400 rounded shadow p-4 dark:bg-gray-800 dark:border-gray-700 mx-auto my-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink pr-4">
+                                <div class="rounded p-3 bg-blue-600">
+                                    <i class="fas fa-tags fa-2x fa-fw fa-inverse"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right md:text-center">
+                                <h5 class="font-bold uppercase text-gray-700 dark:text-gray-300">Total Kategori</h5>
+                                <h3 class="font-bold text-3xl text-gray-800 dark:text-white">{{ $totalKategori }}<span
+                                        class="text-blue-500"><i class="fas fa-caret-down ml-2"></i></span></h3>
                             </div>
                         </div>
-                        <div class="flex-1 text-right md:text-center">
-                            <h5 class="font-bold uppercase text-gray-700 dark:text-gray-300">Total Surat Yang Belum Di
-                                Ajukan</h5>
-                            <a href="">
-                                <h3 class="font-bold text-3xl text-gray-800 dark:text-white">1
-                                    <span class="text-blue-500 ml-2"><i class="fas fa-clock fa-xs"></i></span>
-                                </h3>
-                            </a>
+                    </div>
+                    <!--/Metric Card-->
+                </div>
+                <div class="w-full md:w-1/2 xl:w-1/3 px-3 mb-4 mx-auto my-2">
+                    <!-- Metric Card 4 -->
+                    <div
+                        class="bg-white border border-gray-400 rounded shadow p-4 dark:bg-gray-800 dark:border-gray-700 mx-auto my-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink pr-4">
+                                <div class="rounded p-3 bg-red-600">
+                                    <i class="fas fa-users fa-2x fa-fw fa-inverse"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right md:text-center">
+                                <h5 class="font-bold uppercase text-gray-700 dark:text-gray-300">Total User</h5>
+                                <h3 class="font-bold text-3xl text-gray-800 dark:text-white">{{ $totalUser }}<span
+                                        class="text-red-500"><i class="fas fa-caret-down ml-2"></i></span></h3>
+                            </div>
                         </div>
                     </div>
+                    <!--/Metric Card-->
                 </div>
-            </div>
+            @endif
         </div>
     </div>
+
     {{-- @endif --}}
 @endsection

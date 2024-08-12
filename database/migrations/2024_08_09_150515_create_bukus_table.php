@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->uuid('kategori_id');
             $table->string('judul_buku');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->integer('jumlah_buku');
             $table->string('cover_buku');
             $table->string('file_buku');
