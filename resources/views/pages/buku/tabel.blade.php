@@ -63,24 +63,30 @@
              </div>
              <div class="sm:flex space-between">
                  <div class="items-center mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-                     <form class="lg:pr-3" action="{{ route('dashboard.buku.index') }}" method="GET">
-                         <label for="users-search" class="sr-only">Search</label>
-                         <div class="flex items-center">
-                             <input type="text" name="judul" value="{{ old('judul') }}"
+                     {{-- <form class="lg:pr-3" action="{{ route('dashboard.buku.index') }}" method="GET"> --}}
+                     <label for="users-search" class="sr-only ">Search</label>
+                     <div class="flex items-end">
+                         <div>
+
+                             <p class="text-gray-700 dark:text-gray-200">Total Buku:
+                                 <span id="count_data">{{ $bukuCount }}</span>
+                             </p>
+                             <input type="text" name="judul" value="{{ old('judul') }}" id="input_search"
                                  class="flex-1 bg-gray-50 w-[20rem] border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                  placeholder="Cari Judul Buku">
                              <select name="kategori"
-                                 class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                 <option value="">Pilih Kategori</option>
-                                 @foreach ($kategori as $k)
-                                     <option value="{{ $k->id }}">{{ $k->kategori_buku }}</option>
-                                 @endforeach
-                             </select>
-                             <button type="submit"
-                                 class="ml-2 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800">
-                                 Cari
-                             </button>
+                             class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                             <option value="">Pilih Kategori</option>
+                             @foreach ($kategori as $k)
+                             <option value="{{ $k->id }}">{{ $k->kategori_buku }}</option>
+                             @endforeach
+                            </select>
                          </div>
+                         <button type="submit"
+                             class="ml-2 inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800 ">
+                             Cari
+                         </button>
+                     </div>
                      </form>
                  </div>
 
@@ -109,8 +115,7 @@
                              <svg class="w-4 h-4 ml-2 transform transition-transform duration-300" id="dropdownIcon"
                                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                     d="M19 9l-7 7-7-7">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                                  </path>
                              </svg>
                          </button>
@@ -184,7 +189,9 @@
                          </thead>
                          <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                              @forelse($buku as $b)
-                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                 <tr class="data-row hover:bg-gray-100 dark:hover:bg-gray-700 "
+                                     data-judul="{{ $b->judul_buku }}" data-kategori="{{ $b->kategori->kategori_buku }}"
+                                     data-jumlah="{{ $b->jumlah_buku }}">
 
                                      <td class="w-4 p-4">
                                          <div
@@ -351,4 +358,31 @@
              button.textContent = 'Lihat lebih lengkap';
          }
      }
+
+
+     document.addEventListener('DOMContentLoaded', function() {
+         const tableRows = Array.from(document.querySelectorAll('tr.data-row'));
+         const inputSearch = document.getElementById('input_search');
+         const countData = document.getElementById('count_data');
+
+         inputSearch.addEventListener('input', () => {
+             hideIfNotFound(inputSearch.value);
+         })
+
+         function hideIfNotFound(value) {
+             const pattern = new RegExp(value ? value : '', 'gi');
+             let rowCount = 0;
+             tableRows.forEach(element => {
+                 const isQualified = Object.values(element.dataset).some(data => data.match(pattern));
+                 if (isQualified) {
+                     element.classList.remove('hidden');
+                     rowCount++;
+                 } else {
+                     element.classList.add('hidden');
+                 }
+
+                 countData.textContent = rowCount;
+             });
+         }
+     });
  </script>

@@ -32,11 +32,12 @@
             <main>
                 <div class="px-4 pt-6 rounded-md shadow-md">
                     @yield('content')
-                    <div class="flex justify-center shadow-md rounded-md">
-                        @include('components.footer')
-                    </div>
                 </div>
             </main>
+            <div class="flex justify-center shadow-md rounded-md">
+
+                @include('components.footer')
+            </div>
         </div>
     </div>
     <script src="{{ asset('assets/js/flowbite.min.js') }}"></script>

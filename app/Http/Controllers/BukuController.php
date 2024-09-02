@@ -62,9 +62,11 @@ class BukuController extends Controller
 
         $buku = $qeury->with('kategori')->get();
 
+        $bukuCount = Buku::all()->count();
+
         $kategori = Kategori::orderBy('updated_at', 'desc')->get();
         $bukuEdit = Buku::all()->keyBy('id');
-        return view('pages.buku.tabel', compact('kategori', 'buku', 'bukuEdit'));
+        return view('pages.buku.tabel', compact('kategori', 'buku', 'bukuEdit', 'bukuCount'));
     }
 
     /**
